@@ -4,6 +4,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Structure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,6 +48,20 @@ public class App
                 sss[i].v = i + 1;
             }
             System.out.println("get sum of simple structs by value: " + helloLib.sum_by_vals(sss, length));
+        }
+
+        {
+            System.out.println("construct nested struct and return reference: " + helloLib.construct_ns_ref(1).s);
+        }
+
+        {
+            System.out.println("construct nested struct reference and return reference: " + helloLib.construct_nsr_ref(1).s);
+        }
+
+        {
+            int []vs = {1, 2, 3};
+            HelloLib.StructArray sa = helloLib.construct_sa_ref(vs, vs.length);
+            System.out.print("construct struct array and return reference: " + Arrays.toString(sa.ss.toArray(vs.length)));
         }
     }
 }

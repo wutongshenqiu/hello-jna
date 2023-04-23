@@ -31,4 +31,29 @@ public interface HelloLib extends Library {
 
     // sum_by_vals(ss: *const SimpleStruct, len: usize) -> u32
     int sum_by_vals(SimpleStruct[] sss, int length);
+
+    @Structure.FieldOrder("s")
+    class NestedStruct extends Structure {
+        public SimpleStruct s;
+    }
+
+    // construct_ns_ref(v: u32) -> *mut NestedStruct
+    NestedStruct construct_ns_ref(int v);
+
+    @Structure.FieldOrder("s")
+    class NestedStructRef extends Structure {
+        public SimpleStruct.ByReference s;
+    }
+
+    // construct_nsr_ref(v: u32) -> *mut NestedStructRef
+    NestedStructRef construct_nsr_ref(int v);
+
+    @Structure.FieldOrder({"ss", "len"})
+    class StructArray extends Structure {
+        public SimpleStruct.ByReference ss;
+        public int len;
+    }
+
+    // construct_sa_ref(vs: *const u32, len: usize) -> *mut StructArray
+    StructArray construct_sa_ref(int[] vs, int len);
 }
